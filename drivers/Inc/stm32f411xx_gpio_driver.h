@@ -29,6 +29,67 @@ typedef struct {
 }GPIO_Handle_t;
 
 /*
+ * @GPIO_PIN_NUMBERS
+ * GPIO pin numbers
+ */
+#define GPIO_PIN_NO_0       0
+#define GPIO_PIN_NO_1       1
+#define GPIO_PIN_NO_2       2
+#define GPIO_PIN_NO_3       3
+#define GPIO_PIN_NO_4       4
+#define GPIO_PIN_NO_5       5
+#define GPIO_PIN_NO_6       6
+#define GPIO_PIN_NO_7       7
+#define GPIO_PIN_NO_8       8
+#define GPIO_PIN_NO_9       9
+#define GPIO_PIN_NO_10      10
+#define GPIO_PIN_NO_11      11
+#define GPIO_PIN_NO_12      12
+#define GPIO_PIN_NO_13      13
+#define GPIO_PIN_NO_14      14
+#define GPIO_PIN_NO_15      15
+
+
+/*
+ * @GPIO_PIN_MODES
+ * GPIO pin possible modes
+ */
+#define GPIO_MODE_IN        0 /* GPIO Input mode                          */
+#define GPIO_MODE_OUT       1 /* GPIO Output mode                         */
+#define GPIO_MODE_ALTFN     2 /* GPIO Alternate functionality             */
+#define GPIO_MODE_ANALOG    3 /* GPIO Analog mode                         */
+#define GPIO_MODE_IT_FT     4 /* GPIO Input mode falling edge trigger     */
+#define GPIO_MODE_IT_RT     5 /* GPIO Input mode rising edge trigger      */
+#define GPIO_MODE_IT_FRT    6 /* GPIO Input mode fall-rising edge trigger */
+
+
+/*
+ * @GPIO_PIN_OUTPUT_TYPE
+ * GPIO pin possible output types
+ */
+#define GPIO_OP_TYPE_PP     0 /* GPIO Output type push-pull mode  */
+#define GPIO_OP_TYPE_OD     1 /* GPIO Output type open-drain mode */
+
+
+/*
+ * @GPIO_PIN_SPEED
+ * GPIO pin possible output speeds
+ */
+#define GPIO_SPEED_LOW      0
+#define GPIO_SPEED_MEDIUM   1
+#define GPIO_SPEED_FAST     2
+#define GPIO_SPEED_HIGH     3
+
+
+/*
+ * @GPIO_PIN_PULL_UP_PULL_DOWN
+ * GPIO pin pull-up and pull-down configuration macros
+ */
+#define GPIO_PIN_NO_PUPD    0 /* GPIO configuration no pull-up, pull-down */
+#define GPIO_PIN_PU         1 /* GPIO configuration pull-up               */
+#define GPIO_PIN_PD         2 /* GPIO configuration pull-down             */
+
+/*
  * Peripherical Clock Setup
  */
 void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnOrDi);
