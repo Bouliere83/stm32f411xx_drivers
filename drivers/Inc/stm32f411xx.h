@@ -72,7 +72,7 @@ typedef struct
 	volatile uint32_t DCKCFGR2;     /* RCC dedicated clock configuration register 2,                Address offset: 0x94    */
 }RCC_RegDef_t;
 
-#define RCC ((RCC_RegDef_t*)RCC_BASEADDR);
+#define RCC ((RCC_RegDef_t*)RCC_BASEADDR)
 
 /* EXTI */
 
@@ -108,12 +108,12 @@ typedef struct
 } GPIO_RegDef_t;
 
 
-#define GPIOA	((GPIO_RegDef_t*)GPIOA_BASEADDR);
-#define GPIOB 	((GPIO_RegDef_t*)GPIOB_BASEADDR);
-#define GPIOC 	((GPIO_RegDef_t*)GPIOC_BASEADDR);
-#define GPIOD	((GPIO_RegDef_t*)GPIOD_BASEADDR);
-#define GPIOE	((GPIO_RegDef_t*)GPIOE_BASEADDR);
-#define GPIOH 	((GPIO_RegDef_t*)GPIOH_BASEADDR);
+#define GPIOA	((GPIO_RegDef_t*)GPIOA_BASEADDR)
+#define GPIOB 	((GPIO_RegDef_t*)GPIOB_BASEADDR)
+#define GPIOC 	((GPIO_RegDef_t*)GPIOC_BASEADDR)
+#define GPIOD	((GPIO_RegDef_t*)GPIOD_BASEADDR)
+#define GPIOE	((GPIO_RegDef_t*)GPIOE_BASEADDR)
+#define GPIOH 	((GPIO_RegDef_t*)GPIOH_BASEADDR)
 
 /*
  * Clock enable macros for GPIO peripherals
@@ -254,4 +254,13 @@ typedef struct
 #define USART2_PCLK_DI()	(RCC->APB1RSTR 	&= ~(1 << 17))
 #define USART6_PCLK_DI()	(RCC->APB2RSTR 	&= ~(1 << 5))
 
+/*
+ * General Macros
+ */
+#define ENABLE 			1
+#define DISABLE			0
+#define SET  			ENABLE
+#define RESET 			DISABLE
+#define GPIO_PIN_SET	SET
+#define GPIO_PIN_RESET	RESET
 #endif /* INC_STM32F411XX_H_ */
