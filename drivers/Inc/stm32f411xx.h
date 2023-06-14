@@ -135,6 +135,15 @@ typedef struct
 #define GPIOE_PCLK_DI()	(RCC->AHB1RSTR &= ~(1 << 4))
 #define GPIOH_PCLK_DI()	(RCC->AHB1RSTR &= ~(1 << 7))
 
+/* Reset GPIO Peripheral */
+
+#define GPIOA_REG_RESET()	do { (RCC->AHB1ENR |= (1 << 0)); (RCC->AHB1ENR &= ~(1 << 0));}while(0)
+#define GPIOB_REG_RESET()	do { (RCC->AHB1ENR |= (1 << 1)); (RCC->AHB1ENR &= ~(1 << 1));}while(0)
+#define GPIOC_REG_RESET()	do { (RCC->AHB1ENR |= (1 << 2)); (RCC->AHB1ENR &= ~(1 << 2));}while(0)
+#define GPIOD_REG_RESET()	do { (RCC->AHB1ENR |= (1 << 3)); (RCC->AHB1ENR &= ~(1 << 3));}while(0)
+#define GPIOE_REG_RESET()	do { (RCC->AHB1ENR |= (1 << 4)); (RCC->AHB1ENR &= ~(1 << 4));}while(0)
+#define GPIOH_REG_RESET()	do { (RCC->AHB1ENR |= (1 << 7)); (RCC->AHB1ENR &= ~(1 << 7));}while(0)
+
 /******************* SPI ********************/
 
 #define SPI1_BASEADDR			(APB2_BASEADDR + 0xBC00)

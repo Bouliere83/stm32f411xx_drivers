@@ -87,7 +87,48 @@ void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnOrDi)
  *****************************************************************/
 void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 {
+	uint32_t temp = 0;
 
+	/* Mode */
+	if(pGPIOHandle->GPIO_PinCOnfig.GPIO_PinMode <= GPIO_MODE_ANALOG)
+	{
+		temp = pGPIOHandle->GPIO_PinCOnfig.GPIO_PinMode << (2 * pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber);
+		pGPIOHandle->pGPIOx->MODER &= ~(3 << pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber);
+		pGPIOHandle->pGPIOx->MODER |= temp;
+		temp = 0;
+	}
+	else {
+		//Interrupt mode
+	}
+
+	/* Speed */
+	temp = pGPIOHandle->GPIO_PinCOnfig.GPIO_PinSpeed << (2 * pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber);
+	pGPIOHandle->pGPIOx->OSPEEDR &= ~(3 << pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber);
+	pGPIOHandle->pGPIOx->OSPEEDR |= temp;
+	temp = 0;
+
+	/* pupd */
+	temp = pGPIOHandle->GPIO_PinCOnfig.GPIO_PinPuPdControl << (2 * pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber);
+	pGPIOHandle->pGPIOx->PUPDR &= ~(3 << pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber);
+
+	pGPIOHandle->pGPIOx->PUPDR |= temp;
+	temp = 0;
+
+	/* otype */
+	temp = pGPIOHandle->GPIO_PinCOnfig.GPIO_PinOPType << pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber;
+	pGPIOHandle->pGPIOx->PUPDR &= ~(1 << pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber);
+	pGPIOHandle->pGPIOx->OTYPER |= temp;
+	temp = 0;
+
+	/* Alternate functions */
+	if(pGPIOHandle->GPIO_PinCOnfig.GPIO_PinMode == GPIO_MODE_ALTFN)
+	{
+		uint32_t temp1, temp2;
+		temp1 = pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber / 8;
+		temp2 = pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber % 8;
+		pGPIOHandle->pGPIOx->AFR[temp1] &= ~(0xF << pGPIOHandle->GPIO_PinCOnfig.GPIO_PinNumber);
+		pGPIOHandle->pGPIOx->AFR[temp1] |= (pGPIOHandle->GPIO_PinCOnfig.GPIO_PinAltFunMode << (4 * temp2));
+	}
 }
 
 /*****************************************************************
@@ -104,7 +145,25 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
  *****************************************************************/
 void GPIO_DeInit(GPIO_RegDef_t *pGPIOx)
 {
-
+	if(pGPIOx == GPIOA)
+	{
+		GPIOA_REG_RESET();
+	}
+	else if(pGPIOx == GPIOB) {
+		GPIOB_REG_RESET();
+	}
+	else if(pGPIOx == GPIOC) {
+		GPIOC_REG_RESET();
+	}
+	else if(pGPIOx == GPIOD) {
+		GPIOD_REG_RESET();
+	}
+	else if(pGPIOx == GPIOE) {
+		GPIOE_REG_RESET();
+	}
+	else if(pGPIOx == GPIOH) {
+		GPIOH_REG_RESET();
+	}
 }
 
 /*****************************************************************
